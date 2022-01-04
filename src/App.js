@@ -1,6 +1,12 @@
+import GlobalStyle from 'assets/styles/globalStyles';
+import Navigation from 'components/templates/Navigation/Navigation';
+
 const App = () => {
     return ( 
-        <h1>Webmar</h1>
+        <>
+            <GlobalStyle />
+            <Navigation />
+        </>
      );
 }
  
