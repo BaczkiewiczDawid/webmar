@@ -1,14 +1,42 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+export const Wrapper = styled.div`
+    @media screen and (min-width: 768px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80vw;
+        max-width: 94rem;
+        margin: auto;
+        margin-top: 15%;
+        transform: translateY(-15%);
+    }
+`;
 
 export const Header = styled.header`
     width: 90vw;
     margin: 2rem auto;
+
+    @media screen and (min-width: 768px) {
+        width: 30vw;
+
+        h1 {
+            font-size: 3rem;
+        }
+    }
 `;
 
 export const BasicInfo = styled.p`
     margin-top: 1rem;
     line-height: 1.3rem;
     letter-spacing: .04rem;
+
+    @media screen and (min-width: 768px) {
+         font-size: 1.3rem;
+         line-height: 1.6rem;
+         letter-spacing: .06rem;
+    }
 `;
 
 export const FormWrapper = styled.section`
@@ -19,6 +47,10 @@ export const FormWrapper = styled.section`
     justify-content: center;
     align-items: center;
     box-shadow: -1px 8px 27px -9px ${({ theme }) => theme.colors.black};
+
+    @media screen and (min-width: 768px) {
+        width: 40vw;
+    }
 `;
 
 export const Form = styled.form`
@@ -40,16 +72,18 @@ export const Input = styled.input`
     padding: .8rem 1rem;
 `;
 
-export const Button = styled.button`
+export const Button = styled(Link)`
     width: 100%;
     background-color: ${({ theme }) => theme.colors.blue};
     margin-top: 2rem;
     border: none;
     color: ${({ theme }) => theme.colors.white};
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
     padding: .8rem 2rem;
     border-radius: .5rem;
+    text-align: center;
+    text-decoration: none;
 `;
 
 export const Switch = styled.span`

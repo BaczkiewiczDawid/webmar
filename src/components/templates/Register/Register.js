@@ -1,8 +1,8 @@
-import { Header, BasicInfo, FormWrapper, Form, Input, Button, Switch } from './Register.styles';
+import { Wrapper, Header, BasicInfo, FormWrapper, Form, Input, Button, Switch } from './Register.styles';
 
 const Register = () => {
     return ( 
-        <>
+        <Wrapper>
             <Header>
                 <h1>Sign up to<br />Webmar</h1>
                 <BasicInfo>Add and comment photos, check what's going on with your friends and write to them!</BasicInfo>
@@ -16,7 +16,7 @@ const Register = () => {
                     <Switch>Already have an account? <a href="/login">Login now!</a></Switch>
                 </Form>
             </FormWrapper>
-        </>
+        </Wrapper>
      );
 }
  
