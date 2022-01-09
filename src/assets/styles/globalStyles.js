@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: 'Roboto', sans-serif;
+        overflow-x: hidden;
     }
 
     h1, h2, h3, h4, h5, h6, p, a, span, li {
