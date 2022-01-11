@@ -6,6 +6,7 @@ const posts = [
         name: 'Dawson',
         location: 'Las Vegas',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero eligendi error perferendis ad corrupti facilis nulla laboriosam iste culpa repellat!',
+        likes: 17,
         img: img
     },
     {
@@ -13,6 +14,7 @@ const posts = [
         name: 'Karol',
         location: 'Warsaw',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero eligendi error perferendis ad corrupti facilis nulla laboriosam iste culpa repellat!',
+        likes: 24,
         img: img
     },
     {
@@ -20,6 +22,7 @@ const posts = [
         name: 'Karolina',
         location: 'Paris',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero eligendi error perferendis ad corrupti facilis nulla laboriosam iste culpa repellat!',
+        likes: 11,
         img: img
     }
 ]

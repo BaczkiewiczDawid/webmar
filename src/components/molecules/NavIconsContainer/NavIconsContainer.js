@@ -5,7 +5,7 @@ const NavIconsContainer = ({ icons }) => {
     return ( 
         <NavIcons>
             {icons.map((icon) => (
-                <Icon icon={icon} />
+                <Icon key={icon.id} icon={icon} />
             ))}
         </NavIcons>
      );
