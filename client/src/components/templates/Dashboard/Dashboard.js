@@ -6,6 +6,7 @@ import posts from 'data/posts'
 import styled from 'styled-components';
 import Axios from 'axios';
 import img from 'assets/images/1.jpg';
+import { Navigate } from 'react-router-dom';
 
 const NewPostContainer = styled.div`
     display: flex;
@@ -122,10 +123,9 @@ const Dashboard = () => {
 
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
-            console.log(response.data);
             setPostsList(response.data)
         })
-    }, [postsList])
+    }, [])
 
     const openForm = () => {
         if (!isFormOpened) {
@@ -159,12 +159,6 @@ const Dashboard = () => {
             setPostsList([...postsList, newPost]);
         }
     }
-
-    // useEffect(() => {
-    //     postsList.sort((a, b) => {
-    //         return new Date(b.date) - new Date(a.date);
-    //     })
-    // }, [postsList])
 
     return ( 
         <>

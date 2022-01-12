@@ -1,9 +1,9 @@
 import { UserInfoContainer } from './UserInfo.style';
 
-const UserInfo = ({ name, location }) => {
+const UserInfo = ({ user, location }) => {
     return ( 
         <UserInfoContainer>
-            <h2>{name}</h2>
+            <h2>{user}</h2>
             <span>In {location}</span>
         </UserInfoContainer>
      );
