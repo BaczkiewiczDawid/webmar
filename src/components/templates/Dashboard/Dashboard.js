@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navigation from 'components/templates/Navigation/Navigation';
 import SinglePost from 'components/organisms/SinglePost/SinglePost';
 import { PostsContainer } from './Dashboard.style';
 import posts from 'data/posts'
 import styled from 'styled-components';
-import folder from 'assets/images/folder-icon.svg';
+import img from 'assets/images/1.jpg';
 
 const NewPostContainer = styled.div`
     display: flex;
@@ -89,11 +89,12 @@ const Title = styled.h1`
 
 const AttatchFile = styled.div`
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
     margin: 1rem;
 
-    span {
-        margin-left: 1rem;
+    input {
+        margin-top: 1rem;
     }
 `;
 
@@ -109,20 +110,53 @@ const Button = styled.button`
     text-align: center;
     text-decoration: none;
     margin: 5rem auto 0 auto;
+    cursor: pointer;
 `;
 
 const Dashboard = () => {
     const [isFormOpened, setIsFormOpened] = useState(false);
+    const [postsList, setPostsList] = useState(posts);
+    const [description, setDescription] = useState('');
+    const [photo, setPhoto] = useState('');
 
     const openForm = () => {
         if (!isFormOpened) {
             setIsFormOpened(!isFormOpened);
+            setDescription('');
         }
     }
 
-    const handlePublicPost = () => {
-        setIsFormOpened(!isFormOpened);
+    const handleGetDescription = (e) => {
+        setDescription(e.target.value);
     }
+
+    const handlePassPhoto = (e) => {
+        setPhoto(e.target.value);
+    }
+
+    const handlePublicPost = (e) => {
+        e.preventDefault();
+        setIsFormOpened(!isFormOpened);
+
+        const newPost = {
+            id: Math.floor(Math.random() * 10000),
+            description: description,
+            img: photo,
+            likes: 0,
+            location: 'paris',
+            name: 'Dawson',
+        }
+
+        if (description) {
+            setPostsList([...postsList, newPost]);
+        }
+    }
+
+    // useEffect(() => {
+    //     postsList.sort((a, b) => {
+    //         return new Date(b.date) - new Date(a.date);
+    //     })
+    // }, [postsList])
 
     return ( 
         <>
@@ -134,16 +168,16 @@ const Dashboard = () => {
             {isFormOpened ?
                 <Form>
                     <Title>Whats on your mind?</Title>
-                    <TextArea placeholder="Type something..."></TextArea>
+                    <TextArea placeholder="Type something..." onChange={(e) => handleGetDescription(e)}></TextArea>
                     <AttatchFile>
-                        <img src={folder} alt="attach file" />
-                        <span>Upload photo</span>
+                        <h2>Choose photo</h2>
+                        <input type="file" onChange={(e) => handlePassPhoto(e)}/>
                     </AttatchFile>
-                    <Button onClick={handlePublicPost}>Public post</Button>
+                    <Button onClick={(e) => handlePublicPost(e)}>Public post</Button>
                 </Form>
             : null}
             <PostsContainer>
-                {posts.map((post) => <SinglePost key={post.id} name={post.name} location={post.location} img={post.img} description={post.description} likes={post.likes} />)}
+                {postsList.map((post) => <SinglePost key={post.id} name={post.name} location={post.location} img={post.img} description={post.description} likes={post.likes} />)}
             </PostsContainer>
         </>
      );
