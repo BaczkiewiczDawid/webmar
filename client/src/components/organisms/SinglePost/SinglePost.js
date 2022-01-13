@@ -3,8 +3,9 @@ import { PostContainer, Picture, Text, Likes } from './SinglePost.style';
 import heart from 'assets/images/heart-icon.svg';
 import image from 'assets/images/1.jpg';
 import UserInfo from 'components/molecules/UserInfo/UserInfo';
+import Axios from 'axios';
 
-const SinglePost = ({ user, location, img, description, likes }) => {
+const SinglePost = ({ id, user, location, img, description, likes }) => {
     const [likesNumber, setLikesNumber] = useState(likes);
     const [isLiked, setIsLiked] = useState(false);
 
@@ -16,6 +17,13 @@ const SinglePost = ({ user, location, img, description, likes }) => {
             setLikesNumber(likesNumber - 1);
             setIsLiked(!isLiked);
         }
+
+        Axios.post('http://localhost:3001/api/likes', {
+            isLiked: isLiked,
+            id: id
+        }).then(() => {
+            console.log('like added')
+        })
     }
 
     return ( 
