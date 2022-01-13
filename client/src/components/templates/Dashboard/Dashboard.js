@@ -2,11 +2,8 @@ import { useState, useEffect } from 'react';
 import Navigation from 'components/templates/Navigation/Navigation';
 import SinglePost from 'components/organisms/SinglePost/SinglePost';
 import { PostsContainer } from './Dashboard.style';
-import posts from 'data/posts'
 import styled from 'styled-components';
 import Axios from 'axios';
-import img from 'assets/images/1.jpg';
-import { Navigate } from 'react-router-dom';
 
 const NewPostContainer = styled.div`
     display: flex;
@@ -18,13 +15,13 @@ const NewPostContainer = styled.div`
     padding: .8rem 1.5rem;
 
     @media screen and (min-width: 768px) {
-        width: 40vw;
+        width: 50vw;
         margin: none;
         margin-left: 2rem;
     }
 
     @media screen and (min-width: 1024px) {
-        width: 40vw;
+        width: 45vw;
         margin: none;
         margin-left: 2.2rem;
     }
@@ -115,6 +112,22 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const CloseButton = styled.button`
+    background-color: transparent;
+    border: none;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.black};
+    margin-right: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+`;
+
 const Dashboard = () => {
     const [isFormOpened, setIsFormOpened] = useState(false);
     const [postsList, setPostsList] = useState([]);
@@ -142,22 +155,27 @@ const Dashboard = () => {
         setPhoto(e.target.value);
     }
 
+    const closeForm = () => {
+        setIsFormOpened(false);
+    }
+
     const handlePublicPost = (e) => {
         e.preventDefault();
         setIsFormOpened(!isFormOpened);
 
         const newPost = {
-            id: Math.floor(Math.random() * 10000),
             description: description,
             img: photo,
             likes: 0,
             location: 'paris',
-            name: 'Dawson',
+            user: 'Dawson',
         }
 
-        if (description) {
-            setPostsList([...postsList, newPost]);
-        }
+        Axios.post('http://localhost:3001/api/new', {
+            newPost: newPost
+        }).then(() => {
+            console.log('new post added')
+        })
     }
 
     return ( 
@@ -169,7 +187,10 @@ const Dashboard = () => {
             </NewPostContainer>
             {isFormOpened ?
                 <Form>
-                    <Title>Whats on your mind?</Title>
+                    <Wrapper>
+                        <Title>Whats on your mind?</Title>
+                        <CloseButton onClick={closeForm}>X</CloseButton>
+                    </Wrapper>
                     <TextArea placeholder="Type something..." onChange={(e) => handleGetDescription(e)}></TextArea>
                     <AttatchFile>
                         <h2>Choose photo</h2>
@@ -179,7 +200,7 @@ const Dashboard = () => {
                 </Form>
             : null}
             <PostsContainer>
-                {postsList.map((post) => <SinglePost key={post.id} user={post.user} location={post.location} img={post.img} description={post.description} likes={post.likes} />)}
+                {postsList.map((post) => <SinglePost key={post.id} id={post.id} user={post.user} location={post.location} img={post.img} description={post.description} likes={post.likes} />)}
             </PostsContainer>
         </>
      );
