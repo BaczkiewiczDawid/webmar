@@ -84,6 +84,7 @@ export const Button = styled(Link)`
     border-radius: .5rem;
     text-align: center;
     text-decoration: none;
+    cursor: pointer;
 `;
 
 export const Switch = styled.span`
