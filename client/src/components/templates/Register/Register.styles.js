@@ -81,6 +81,7 @@ export const Button = styled.button`
     font-weight: 700;
     padding: .8rem 2rem;
     border-radius: .5rem;
+    cursor: pointer;
 `;
 
 export const Switch = styled.span`
