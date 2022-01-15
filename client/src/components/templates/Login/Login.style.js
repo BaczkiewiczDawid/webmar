@@ -72,7 +72,7 @@ export const Input = styled.input`
     padding: .8rem 1rem;
 `;
 
-export const Button = styled(Link)`
+export const Button = styled.button`
     width: 100%;
     background-color: ${({ theme }) => theme.colors.blue};
     margin-top: 2rem;

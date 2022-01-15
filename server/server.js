@@ -82,7 +82,7 @@ app.post('/api/register', (req, res) => {
         })
 })
 
-app.post('/api/getpassword', (req, res) => {
+app.post('/api/login', (req, res) => {
     const loginData = req.body.loginData;
 
     const getUserData = `SELECT * FROM users WHERE email='${loginData.email}'`;
@@ -91,8 +91,11 @@ app.post('/api/getpassword', (req, res) => {
         if (err) {
             console.log(err)
         } else {
-            const isPasswordMatch = bcrypt.compareSync(loginData.password, result[0].password)
-            res.send(isPasswordMatch);
+            if (result.length > 0) {
+                const isPasswordMatch = bcrypt.compareSync(loginData.password, result[0].password)
+                res.send(isPasswordMatch);
+                console.log(isPasswordMatch)
+            }
         }
     })
 })

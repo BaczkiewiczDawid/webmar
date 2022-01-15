@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Wrapper ,Header, BasicInfo, FormWrapper, Form, Input, Button, Switch } from './Login.style';
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({
@@ -8,7 +9,9 @@ const Login = () => {
         password: ''
     });
 
-    const [isLoggedCorrectly, setIsLoggedCorrectly] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleLoginData = (e) => {
         e.preventDefault();
@@ -19,15 +22,15 @@ const Login = () => {
         })
     }
 
-    const handleLogin = () => {
-        Axios.post('http://localhost:3001/api/getpassword', {
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        Axios.post('http://localhost:3001/api/login', {
             loginData: loginData
         }).then((response) => {
-            console.log(response.data)
             if (response.data) {
-                setIsLoggedCorrectly(true);
-            } else {
-                setIsLoggedCorrectly(false);
+                setIsAuthenticated(true);
+                navigate('/')
             }
         })
     }
@@ -42,7 +45,7 @@ const Login = () => {
                 <Form>
                     <Input name="email" type="text" placeholder="E-Mail" onChange={(e) => handleLoginData(e)} />
                     <Input name="password" type="password" placeholder="Password" onChange={(e) => handleLoginData(e)} />
-                    <Button to={isLoggedCorrectly ? '/' : '#'} onClick={handleLogin}>Login now</Button>
+                    <Button onClick={(e) => handleLogin(e)}>Login now</Button>
                     <Switch>Don't have an acocunt? <a href="/register">Register now!</a></Switch>
                 </Form>
             </FormWrapper>
