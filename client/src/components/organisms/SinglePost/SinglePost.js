@@ -21,8 +21,6 @@ const SinglePost = ({ id, user, location, img, description, likes }) => {
         Axios.post('http://localhost:3001/api/likes', {
             isLiked: isLiked,
             id: id
-        }).then(() => {
-            console.log('like added')
         })
     }
 
