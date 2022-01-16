@@ -11,12 +11,14 @@ const icons = [
     {
         id: 2,
         src: userIcon,
-        alt: 'User profile'
+        alt: 'User profile',
+        path: 'profile'
     },
     {
         id: 3,
         src: chatIcon,
-        alt: 'Chat'
+        alt: 'Chat',
+        path: 'chat'
     }
 ]
 

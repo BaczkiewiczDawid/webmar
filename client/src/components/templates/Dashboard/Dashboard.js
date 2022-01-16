@@ -5,28 +5,39 @@ import { PostsContainer } from './Dashboard.style';
 import Axios from 'axios';
 import NewPost from 'components/organisms/NewPost/NewPost';
 import NewPostForm from 'components/organisms/NewPostForm/NewPostForm'
+import { useNavigate } from 'react-router-dom';
 
-const Dashboard = () => {
+const Dashboard = ({ isAuthenticated }) => {
     const [isFormOpened, setIsFormOpened] = useState(false);
     const [postsList, setPostsList] = useState([]);
     const [description, setDescription] = useState('');
     const [photo, setPhoto] = useState('');
 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuthenticated.authenticated) {
+            navigate('/login');
+        }
+    }, [isAuthenticated, navigate])
+
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
             setPostsList(response.data)
         })
-    }, [])
+    }, [isFormOpened])
+
+    console.log(postsList)
 
     return ( 
         <>
             <Navigation />
             <NewPost isFormOpened={isFormOpened} setIsFormOpened={setIsFormOpened} setDescription={setDescription} />
             {isFormOpened ?
-                <NewPostForm description={description} setDescription={setDescription} setPhoto={setPhoto} setIsFormOpened={setIsFormOpened} isFormOpened={isFormOpened} photo={photo} />
+                <NewPostForm description={description} setDescription={setDescription} setPhoto={setPhoto} setIsFormOpened={setIsFormOpened} isFormOpened={isFormOpened} photo={photo} isAuthenticated={isAuthenticated} />
             : null}
             <PostsContainer>
-                {postsList.map((post) => <SinglePost key={post.id} id={post.id} user={post.user} location={post.location} img={post.img} description={post.description} likes={post.likes} />)}
+                {postsList.map((post) => <SinglePost key={post.id} id={post.id} user={post.user} location={post.location} img={post.image} description={post.description} likes={post.likes} />)}
             </PostsContainer>
         </>
      );

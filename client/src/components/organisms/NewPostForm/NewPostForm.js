@@ -2,7 +2,7 @@ import { Form, Wrapper, Title, CloseButton, TextArea, Button } from './NewPostFo
 import AttatchFile from 'components/molecules/AttatchFile/AttatchFile';
 import Axios from 'axios';
 
-const NewPostForm = ({ setDescription, setPhoto, setIsFormOpened, isFormOpened, description, photo }) => {
+const NewPostForm = ({ isAuthenticated, setDescription, setPhoto, setIsFormOpened, isFormOpened, description, photo }) => {
     const handleGetDescription = (e) => {
         setDescription(e.target.value);
     }
@@ -20,7 +20,7 @@ const NewPostForm = ({ setDescription, setPhoto, setIsFormOpened, isFormOpened, 
             img: photo,
             likes: 0,
             location: 'paris',
-            user: 'Dawson',
+            user: isAuthenticated.loggedUser,
         }
 
         Axios.post('http://localhost:3001/api/new', {
@@ -35,7 +35,7 @@ const NewPostForm = ({ setDescription, setPhoto, setIsFormOpened, isFormOpened, 
                 <Title>Whats on your mind?</Title>
                 <CloseButton onClick={closeForm}>X</CloseButton>
             </Wrapper>
-            <TextArea placeholder="Type something..." onChange={(e) => handleGetDescription(e)}></TextArea>
+            <TextArea maxLength="160" placeholder="Type something..." onChange={(e) => handleGetDescription(e)}></TextArea>
             <AttatchFile setPhoto={setPhoto} />
             <Button onClick={(e) => handlePublicPost(e)}>Public post</Button>
         </Form>

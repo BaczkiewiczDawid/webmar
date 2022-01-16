@@ -3,13 +3,16 @@ import { Wrapper ,Header, BasicInfo, FormWrapper, Form, Input, Button, Switch } 
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
     });
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // setIsAuthenticated({
+    //     authenticated: false,
+    //     loggedUser: ''
+    // });
 
     const navigate = useNavigate();
 
@@ -28,9 +31,12 @@ const Login = () => {
         Axios.post('http://localhost:3001/api/login', {
             loginData: loginData
         }).then((response) => {
-            if (response.data) {
-                setIsAuthenticated(true);
-                navigate('/')
+            if (response.data[1]) {
+                setIsAuthenticated({
+                    authenticated: true,
+                    loggedUser: response.data[0].name
+                });
+                navigate('/');
             }
         })
     }
