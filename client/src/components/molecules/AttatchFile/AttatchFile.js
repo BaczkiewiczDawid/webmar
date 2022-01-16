@@ -8,7 +8,7 @@ const AttaatchFile = ({ setPhoto }) => {
     return ( 
         <Wrapper>
             <h2>Choose photo</h2>
-            <input type="file" onChange={(e) => handlePassPhoto(e)}/>
+            <input type="text" placeholder="Paste url to image" onChange={(e) => handlePassPhoto(e)} />
         </Wrapper>
      );
 }

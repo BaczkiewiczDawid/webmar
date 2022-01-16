@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { PostContainer, Picture, Text, Likes } from './SinglePost.style';
 import heart from 'assets/images/heart-icon.svg';
-import image from 'assets/images/1.jpg';
 import UserInfo from 'components/molecules/UserInfo/UserInfo';
 import Axios from 'axios';
 
@@ -26,7 +25,7 @@ const SinglePost = ({ id, user, location, img, description, likes }) => {
 
     return ( 
         <PostContainer>
-            <Picture src={image} alt="img" />
+            <Picture src={img} alt="img" />
             <UserInfo user={user} location={location} />
             <Text>{description}</Text>
             <Likes>

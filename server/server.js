@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/api/get', (req, res) => {
-    const getPosts = 'SELECT * FROM posts';
+    const getPosts = 'SELECT * FROM posts ORDER BY id DESC';
 
     db.query(getPosts, (err, result) => {
         if (err) {
@@ -55,7 +55,7 @@ app.post('/api/likes', (req, res) => {
 app.post('/api/new', (req, res) => {
     const newPost = req.body.newPost;
 
-    const insertPost = `INSERT INTO posts VALUES (null, '${newPost.user}', '${newPost.description}', 1, ${newPost.likes}, '${newPost.location}')`;
+    const insertPost = `INSERT INTO posts VALUES (null, '${newPost.user}', '${newPost.description}', '${newPost.img}', ${newPost.likes}, '${newPost.location}')`;
 
     db.query(insertPost, (err, result) => {
         if (err) {
@@ -93,8 +93,8 @@ app.post('/api/login', (req, res) => {
         } else {
             if (result.length > 0) {
                 const isPasswordMatch = bcrypt.compareSync(loginData.password, result[0].password)
-                res.send(isPasswordMatch);
-                console.log(isPasswordMatch)
+                result.push(isPasswordMatch);
+                res.send(result);
             }
         }
     })

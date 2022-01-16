@@ -6,6 +6,7 @@ export const NavIcons = styled.div`
     margin-right: 1rem;
     justify-content: space-between;
     width: 6rem;
+    cursor: pointer;
 
     @media screen and (min-width: 768px) {
         margin-right: 2rem;
