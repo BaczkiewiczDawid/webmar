@@ -6,7 +6,7 @@ const icons = [
     {
         id: 1,
         src: searchIcon,
-        alt: 'Search'
+        alt: 'search'
     },
     {
         id: 2,

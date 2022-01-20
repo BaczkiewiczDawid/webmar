@@ -10,11 +10,11 @@ export const NavIcons = styled.div`
 
     @media screen and (min-width: 768px) {
         margin-right: 2rem;
-        width: 8rem;
+        width: 21rem;
     }
 
     @media screen and (min-width: 1024px) {
         margin-right: 4rem;
-        width: 10rem;
+        width: 21rem;
     }
 `;
