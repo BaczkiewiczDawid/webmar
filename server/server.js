@@ -31,6 +31,18 @@ app.get('/api/get', (req, res) => {
     });
 })
 
+app.get('/api/getusers', (req, res) => {
+    const getUsers = 'SELECT * FROM users';
+
+    db.query(getUsers, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    })
+})
+
 app.post('/api/likes', (req, res) => {
     const isLiked = req.body.isLiked;
     const id = req.body.id;

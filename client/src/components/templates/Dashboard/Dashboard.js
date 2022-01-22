@@ -19,7 +19,7 @@ const Dashboard = ({ isAuthenticated }) => {
         if (!isAuthenticated.authenticated) {
             navigate('/login');
         }
-    }, [isAuthenticated, navigate])
+    })
 
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
