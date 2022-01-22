@@ -18,3 +18,7 @@ export const NavIcons = styled.div`
         width: 21rem;
     }
 `;
+
+export const SearchContainer = styled.div`
+    display: flex;
+`;
