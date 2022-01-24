@@ -27,8 +27,6 @@ const Dashboard = ({ isAuthenticated }) => {
         })
     }, [isFormOpened])
 
-    console.log(postsList)
-
     return ( 
         <>
             <Navigation />

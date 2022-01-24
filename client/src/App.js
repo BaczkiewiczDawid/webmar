@@ -23,6 +23,7 @@ const App = () => {
                     <Route path="login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
                     <Route exact path="/" element={<Dashboard isAuthenticated={isAuthenticated} />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/user/:id" element={<Profile />} />
                 </Routes>
             </ThemeProvider>
         </Router> 

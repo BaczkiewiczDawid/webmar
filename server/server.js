@@ -112,6 +112,20 @@ app.post('/api/login', (req, res) => {
     })
 })
 
+app.post('/api/profile', (req, res) => {
+    const currentUser = req.body.currentUser;
+
+    const getUserData = `SELECT * FROM users WHERE id='${currentUser}'`;
+
+    db.query(getUserData, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result);
+        }
+    })
+})
+
 
 app.listen(3001, () => {
     console.log('running');
