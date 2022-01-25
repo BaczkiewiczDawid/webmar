@@ -16,7 +16,7 @@ const SearchList = ({ filteredUsersList, isOpen, setIsOpen }) => {
         <SearchListWrapper isOpen={isOpen} ref={ref} >
             <UsersListContainer>
                 {filteredUsersList.map((user) => (
-                    <User user={user} />
+                    <User key={user.id} user={user} />
                 ))}
             </UsersListContainer>
         </SearchListWrapper>

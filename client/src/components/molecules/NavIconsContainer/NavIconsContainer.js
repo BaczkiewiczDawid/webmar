@@ -33,7 +33,7 @@ const NavIconsContainer = ({ icons }) => {
     return ( 
         <NavIcons>
             {icons.map((icon) => (
-                <>
+                <div key={icon.id}>
                     {icon.path ? 
                         <Link to={`/${icon.path}`}>
                             <Icon key={icon.id} icon={icon} />
@@ -49,7 +49,7 @@ const NavIconsContainer = ({ icons }) => {
                             <Icon key={icon.id} icon={icon} />
                         </SearchContainer>
                     }
-                </>
+                </div>
             ))}
         </NavIcons>
      );

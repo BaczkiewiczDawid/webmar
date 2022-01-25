@@ -20,7 +20,21 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/api/get', (req, res) => {
-    const getPosts = 'SELECT * FROM posts ORDER BY id DESC';
+    const getPosts = 'SELECT users.name, posts.id, posts.user, posts.description, posts.image, posts.likes, posts.location FROM posts, users WHERE posts.user = users.id';
+
+    db.query(getPosts, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    });
+})
+
+app.post('/api/get-user-posts', (req, res) => {
+    const user = req.body.currentUser;
+
+    const getPosts = `SELECT * FROM posts, users WHERE posts.user = users.id AND posts.user=${user} ORDER BY posts.id DESC`;
 
     db.query(getPosts, (err, result) => {
         if (err) {
@@ -115,11 +129,11 @@ app.post('/api/login', (req, res) => {
 app.post('/api/profile', (req, res) => {
     const currentUser = req.body.currentUser;
 
-    const getUserData = `SELECT * FROM users WHERE id='${currentUser}'`;
+    const getUserData = `SELECT * FROM users WHERE id=${currentUser}`;
 
     db.query(getUserData, (err, result) => {
         if (err) {
-            console.log(err)
+            console.log(err);
         } else {
             res.send(result);
         }

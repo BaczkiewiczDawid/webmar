@@ -27,6 +27,8 @@ const Dashboard = ({ isAuthenticated }) => {
         })
     }, [isFormOpened])
 
+    console.log(postsList)
+
     return ( 
         <>
             <Navigation />
@@ -35,7 +37,7 @@ const Dashboard = ({ isAuthenticated }) => {
                 <NewPostForm description={description} setDescription={setDescription} setPhoto={setPhoto} setIsFormOpened={setIsFormOpened} isFormOpened={isFormOpened} photo={photo} isAuthenticated={isAuthenticated} />
             : null}
             <PostsContainer>
-                {postsList.map((post) => <SinglePost key={post.id} id={post.id} user={post.user} location={post.location} img={post.image} description={post.description} likes={post.likes} />)}
+                {postsList.map((post) => <SinglePost key={post.id} id={post.id} user={post.name} location={post.location} img={post.image} description={post.description} likes={post.likes} />)}
             </PostsContainer>
         </>
      );
