@@ -9,11 +9,6 @@ const Login = ({ setIsAuthenticated }) => {
         password: ''
     });
 
-    // setIsAuthenticated({
-    //     authenticated: false,
-    //     loggedUser: ''
-    // });
-
     const navigate = useNavigate();
 
     const handleLoginData = (e) => {
@@ -34,7 +29,7 @@ const Login = ({ setIsAuthenticated }) => {
             if (response.data[1]) {
                 setIsAuthenticated({
                     authenticated: true,
-                    loggedUser: response.data[0].name
+                    loggedUser: response.data[0].id,
                 });
                 navigate('/');
             }
