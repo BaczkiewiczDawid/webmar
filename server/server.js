@@ -140,6 +140,21 @@ app.post('/api/profile', (req, res) => {
     })
 })
 
+app.post('/api/update-user-description', (req, res) => {
+    const currentUser = req.body.currentUser;
+    const userDescription = req.body.userDescription
+
+    const getUserData = `UPDATE users SET description = '${userDescription}' WHERE user.id = ${currentUser}`;
+
+    db.query(getUserData, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    })
+})
+
 
 app.listen(3001, () => {
     console.log('running');

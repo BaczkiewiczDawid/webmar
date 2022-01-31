@@ -14,6 +14,8 @@ const App = () => {
         loggedUser: ''
     });
 
+    console.log(isAuthenticated)
+
     return (
         <Router>
                 <ThemeProvider theme={theme}>
@@ -23,7 +25,7 @@ const App = () => {
                     <Route path="login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
                     <Route exact path="/" element={<Dashboard isAuthenticated={isAuthenticated} />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/user/:id" element={<Profile />} />
+                    <Route path="/user/:id" element={<Profile isAuthenticated={isAuthenticated} />} />
                 </Routes>
             </ThemeProvider>
         </Router> 
