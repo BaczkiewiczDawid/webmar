@@ -27,7 +27,7 @@ const Dashboard = ({ isAuthenticated }) => {
         })
     }, [isFormOpened])
 
-    console.log(postsList)
+    // console.log(isAuthenticated)
 
     return ( 
         <>

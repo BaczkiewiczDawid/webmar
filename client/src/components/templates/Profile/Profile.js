@@ -4,6 +4,7 @@ import Axios from 'axios';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import SinglePost from 'components/organisms/SinglePost/SinglePost';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePicture = styled.div`
     width: 60px;
@@ -60,9 +61,11 @@ const Title = styled.h3`
     font-size: 1.5rem;
 `;
 
-const Profile = () => {
+const Profile = ({ isAuthenticated }) => {
     const [currentUserData, setCurrentUserData] = useState([]);
     const [postsList, setPostsList] = useState([]);
+    const [userDescription, setUserDescription] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
     const params = useParams();
     const currentUser = params.id
 
@@ -74,13 +77,33 @@ const Profile = () => {
         })
     }, [currentUser]);
 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuthenticated.authenticated) {
+            navigate('/login');
+        }
+    })
+
     useEffect(() => {
         Axios.post('http://localhost:3001/api/get-user-posts', {
             currentUser: currentUser
         }).then((response) => {
             setPostsList(response.data);
         })
-    }, [currentUser]);
+    }, [currentUser, userDescription]);
+
+    const updateUserDescription = (e) => {
+        e.preventDefault();
+        setUserDescription(e.target.value)
+
+        if (!isOpen) {
+            Axios.post('http://localhost:3001/api/update-user-description', {
+                currentUser: currentUser,
+                userDescription: userDescription
+            })
+        }
+    }
 
     return ( 
         <>
@@ -92,7 +115,19 @@ const Profile = () => {
                             <ProfilePicture></ProfilePicture>
                             <Username>{currentUserData[0].name}</Username>
                         </UserInfo>
-                        <Description>In future there will be user description</Description>
+                        {currentUserData[0].id === isAuthenticated.loggedUser ?
+                            <>
+                                <Description>In future there will be user description</Description>
+                                <button onClick={() => setIsOpen(!isOpen)}>{isOpen ? 'SAVE' : 'EDIT'}</button>
+                            </>
+                        : 
+                            <Description>In future there will be user description</Description>
+                        }
+                        {isOpen ? 
+                            <div>
+                                <input onChange={(e) => updateUserDescription(e)} placeholder="Your description" />
+                            </div>
+                        : null }
                     </Header>
 
                     <PostsWrapper>
