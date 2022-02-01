@@ -144,7 +144,7 @@ app.post('/api/update-user-description', (req, res) => {
     const currentUser = req.body.currentUser;
     const userDescription = req.body.userDescription
 
-    const getUserData = `UPDATE users SET description = '${userDescription}' WHERE user.id = ${currentUser}`;
+    const getUserData = `UPDATE users SET description = '${userDescription}' WHERE id = ${currentUser}`;
 
     db.query(getUserData, (err, result) => {
         if (err) {
@@ -153,6 +153,8 @@ app.post('/api/update-user-description', (req, res) => {
             res.send(result);
         }
     })
+
+    console.log(getUserData);
 })
 
 
