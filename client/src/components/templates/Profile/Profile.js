@@ -49,7 +49,7 @@ const Profile = ({ isAuthenticated }) => {
                         {postsList.length > 0 ? 
                             postsList.map((post) => <SinglePost key={Math.floor(Math.random() * 1000)} id={post.id} user={post.name} location={post.location} img={post.image} description={post.description} likes={post.likes} />)
                         : <span>This user haven't posted yet</span>}
-                    </PostsWrapper>
+                    </PostsWrapper> 
                 </Wrapper>
             : 
                 null

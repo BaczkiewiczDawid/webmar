@@ -1,7 +1,8 @@
 import EditDescription from 'components/molecules/EditDescription/EditDescription';
-import { Header, UserInfo, ProfilePicture, Username, Description } from './UserInformation.style';
+import { Header, UserInfo, ProfilePicture, Username, Description, Wrapper, Icon } from './UserInformation.style';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import edit from 'assets/images/edit.svg';
 
 
 const UserInformation = ({ currentUserData, isAuthenticated, isOpen, setIsOpen, setCurrentUserData, setUserDescription, currentUser, userDescription }) => {
@@ -33,10 +34,10 @@ const UserInformation = ({ currentUserData, isAuthenticated, isOpen, setIsOpen, 
                 <Username>{currentUserData[0].name}</Username>
             </UserInfo>
             {currentUserData[0].id === isAuthenticated.loggedUser ?
-                <>
+                <Wrapper>
                     <Description>{currentUserData[0].description}</Description>
-                    <button onClick={handleDescription}>EDIT</button>
-                </>
+                    <Icon onClick={handleDescription} src={edit} alt="edit description" />
+                </Wrapper>
                 : 
                 <Description>{currentUserData[0].description}</Description>
             }

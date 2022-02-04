@@ -44,9 +44,11 @@ const NavIconsContainer = ({ icons }) => {
                                 <> 
                                     <SearchBar showSearchList={showSearchList} setSearchValue={setSearchValue} />
                                     <SearchList isOpen={isOpen} filteredUsersList={filteredUsersList} setIsOpen={setIsOpen} />
+                                    <Icon key={icon.id} icon={icon} />
                                 </>
-                            : null}    
-                            <Icon key={icon.id} icon={icon} />
+                            :  
+                                <Icon key={icon.id} icon={icon} /> 
+                            }    
                         </SearchContainer>
                     }
                 </div>
